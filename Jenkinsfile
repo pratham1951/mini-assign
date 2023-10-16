@@ -41,34 +41,34 @@ pipeline {
             }
         }
 
-        stage('SONAR SCANNER') {
-            environment {
-            sonar_token = credentials('SONAR_TOKEN')
-            }
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.projectName=$JOB_NAME \
-                    -Dsonar.projectKey=$JOB_NAME \
-                    -Dsonar.host.url=https://orange-capybara-6wr67vp9vg7c4p6q-9000.app.github.dev/ \
-                    -Dsonar.token=$sonar_token'
-            }
-        } 
+        // stage('SONAR SCANNER') {
+        //     environment {
+        //     sonar_token = credentials('SONAR_TOKEN')
+        //     }
+        //     steps {
+        //         sh 'mvn sonar:sonar -Dsonar.projectName=$JOB_NAME \
+        //             -Dsonar.projectKey=$JOB_NAME \
+        //             -Dsonar.host.url=https://orange-capybara-6wr67vp9vg7c4p6q-9000.app.github.dev/ \
+        //             -Dsonar.token=$sonar_token'
+        //     }
+        // } 
 
-         stage('Artifactory'){
-            steps{
+        //  stage('Artifactory'){
+        //     steps{
             
-            rtUpload (
-                serverId: 'artifactory-docker',
-                spec: '''{
-                      "files": [
-                        {
-                          "pattern": "*.war",
-                          "target": "libs-local"
-                        }
-                     ]
-                }''',
-            )
-            }
-        }
+        //     rtUpload (
+        //         serverId: 'artifactory-docker',
+        //         spec: '''{
+        //               "files": [
+        //                 {
+        //                   "pattern": "*.war",
+        //                   "target": "libs-local"
+        //                 }
+        //              ]
+        //         }''',
+        //     )
+        //     }
+        // }
 
         
         stage ('Deploy to Development environments') {
