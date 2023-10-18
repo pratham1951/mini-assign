@@ -53,22 +53,22 @@ pipeline {
             }
         } 
 
-        //  stage('Artifactory'){
-        //     steps{
+         stage('Artifactory'){
+            steps{
             
-        //     rtUpload (
-        //         serverId: 'artifactory-docker',
-        //         spec: '''{
-        //               "files": [
-        //                 {
-        //                   "pattern": "*.war",
-        //                   "target": "libs-local"
-        //                 }
-        //              ]
-        //         }''',
-        //     )
-        //     }
-        // }
+            rtUpload (
+                serverId: 'artifactory-docker',
+                spec: '''{
+                      "files": [
+                        {
+                          "pattern": "*.war",
+                          "target": "libs-local"
+                        }
+                     ]
+                }''',
+            )
+            }
+        }
 
         
         stage ('Deploy to Development environments') {
