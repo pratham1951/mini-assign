@@ -78,6 +78,7 @@ pipeline {
             steps {
                 echo "Deploying to ${params.ENVIRONMENT}"
                  script {
+                   sh 'rm -R  -f /home/ubuntu/apache-tomcat-9.0.82/webapps/calculator.war'
                    sh 'cp $WORKSPACE/target/*.war /home/ubuntu/apache-tomcat-9.0.82/webapps'
                 }
              }
@@ -90,6 +91,7 @@ pipeline {
                 input message: 'Confirm deployment to production...', ok: 'Deploy'
                 echo "Deploying to ${params.ENVIRONMENT}"
                 script {
+                   sh 'rm -R  -f /home/ubuntu/apache-tomcat-9.0.82/app2/calculator.war'
                    sh 'cp $WORKSPACE/target/*.war /home/ubuntu/apache-tomcat-9.0.82/app2'
                 }
             }
